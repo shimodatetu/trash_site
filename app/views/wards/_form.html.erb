@@ -1,0 +1,32 @@
+<%= form_with(model: ward) do |form| %>
+  <% if ward.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(ward.errors.count, "error") %> prohibited this ward from being saved:</h2>
+
+      <ul>
+        <% ward.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :ward_name, "追加区名", style: "display: block" %>
+    <%= form.text_field :ward_name, id: :ward_name, list: 'ward-list-name' %>
+    <datalist id="ward-list-name">
+      <% @wards.each do |ward| %>
+        <option value="<%= ward.name %>">
+      <% end %>
+    </datalist>
+  </div>
+
+  <div>
+    <%= form.label :wardplace_name, "追加地域名", style: "display: block" %>
+    <%= form.text_field :wardplace_name, id: :wardplace_name%>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

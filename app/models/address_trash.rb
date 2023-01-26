@@ -1,0 +1,2 @@
+class AddressTrash < ApplicationRecord
+end
