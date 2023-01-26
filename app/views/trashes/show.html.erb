@@ -1,10 +1,37 @@
-<p style="color: green"><%= notice %></p>
+<h1>ごみ検索</h1>
 
-<%= render @trash %>
+<%= form_with(url: "/trashes/"+@ward.id.to_s+"/"+@wardplace.id.to_s, method: :get) do |form| %>
+  <div>
+    <%= form.label :検索項目, '' %>
+      
+    <% if @search_word != "" %>
+      ：<%= @search_word %>
+    <% end %>
+    <br>
+    <%= form.text_field :search_word %>
+  </div>
+  <div>
+    <%= form.submit '検索' %>
+  </div>
+<% end %>
+<h2>ごみ一覧</h2>
+<% @trashes.each do |trash| %>
+  <% @address_trash = AddressTrash.find_by(trash_id: trash.id,wardplace_id:@wardplace.id)%>
+  <% if @address_trash == nil %>
+    <% @address_trash = AddressTrash.find_by(trash_id: trash.id,wardplace_id:@default_wardplace.id)%>
+  <% end %>
+  <% if @address_trash!= nil %>
+    <% @trash_type = TrashType.find_by(id:@address_trash.trash_type_id) %>
+    <div class="trash_cover">
+      <h3>ゴミ：<%= trash.name %></h3>
 
+      <h3>種類：<%= @trash_type.name %></h3>
+    </div>
+  <% end %>
+  
+<% end %>
+
+<%= render partial:"form", locals:{ ward: @ward,wardplace: @wardplace,search_word: @search_word,trashes: @trashes, trash_types: @trash_types}%>
 <div>
-  <%= link_to "Edit this trash", edit_trash_path(@trash) %> |
-  <%= link_to "Back to trashes", trashes_path %>
-
-  <%= button_to "Destroy this trash", @trash, method: :delete %>
+  <%= link_to "区の選択に戻る", wards_path %>
 </div>

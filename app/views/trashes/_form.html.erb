@@ -1,30 +1,31 @@
-<%= form_with(model: trash) do |form| %>
-  <% if trash.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(trash.errors.count, "error") %> prohibited this trash from being saved:</h2>
 
-      <ul>
-        <% trash.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+<div class="add_form">
+  <h2>ごみ追加</h2>
+  <%= form_with(url: "/trashes/create", method: :post) do |form| %>
+
+    <%= form.hidden_field :search_word, value:search_word%>
+    <%= form.hidden_field :ward_id, value:ward.id%>
+    <%= form.hidden_field :wardplace_id, value:wardplace.id%>
+    <div>
+      <%= form.label :trash_name, "追加ごみ名", style: "display: block" %>
+      <%= form.text_field :trash_name, id: :user_name, list: 'trash-list-name' %>
+      <datalist id="trash-list-name">
+        <% trashes.each do |trash| %>
+          <option value="<%= trash.name %>">
+      <% end %>
+      </datalist>
+    </div>
+    <div>
+      <%= form.label :trash_type_name, "ごみ区分", style: "display: block" %>
+      <%= form.text_field :trash_type_name, id: :user_name, list: 'trashtype-list-name' %>
+      <datalist id="trashtype-list-name">
+        <% trash_types.each do |trash_type| %>
+          <option value="<%= trash_type.name %>">
         <% end %>
-      </ul>
+      </datalist>
+    </div>
+    <div>
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :ward_name, "追加区名", style: "display: block" %>
-    <%= form.text_field :ward_name, id: :user_name, list: 'ward-list-name' %>
-    <datalist id="ward-list-name">
-      <% @wards.each do |ward| %>
-      <option value="<% ward.name %>">
-    <% end %>
-    </datalist>
-  </div>
-  <div>
-    <%= form.label :name, "追加区名" style: "display: block" %>
-    <%= form.text_field :ward_place_name %>
-  </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

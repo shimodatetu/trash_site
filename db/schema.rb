@@ -33,8 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_132039) do
 
   create_table "trashexplains", force: :cascade do |t|
     t.string "explane"
-    t.integer "ward_place_id"
-    t.integer "trash_id"
+    t.integer "wardplace_id"
+    t.integer "trash_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

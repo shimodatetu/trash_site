@@ -1,0 +1,16 @@
+.ward_cover{
+    width: 400px;
+    border:solid thin #000;
+    padding:10px;
+}
+
+a{
+    border-radius: 5px;
+    border: solid thin #000;
+    margin-top: 20px;
+    padding: 5px;
+    display: block;
+    width: 200px;
+    text-align: center;
+    background: #ccc;
+}

@@ -1,10 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
+<h1><%=@ward.name%>の情報</h1>
+
 <%= render @ward %>
 
 <div>
-  <%= link_to "Edit this ward", edit_ward_path(@ward) %> |
-  <%= link_to "Back to wards", wards_path %>
-
-  <%= button_to "Destroy this ward", @ward, method: :delete %>
+  <%= link_to "区の選択に戻る", wards_path %>
 </div>

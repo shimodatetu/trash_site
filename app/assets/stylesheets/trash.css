@@ -1,0 +1,12 @@
+.trash_cover{
+    width: 400px;
+    border:solid thin #000;
+    padding:10px;
+}
+
+.add_form{
+    width: 400px;
+    margin-top: 30px;
+    border: solid thin #000;
+    padding: 10px;
+}

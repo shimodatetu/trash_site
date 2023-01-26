@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%=@ward.name%>の<%=@wardplace.name%>のゴミ情報</h1>
+
+  <%= link_to "ごみ検索", "/trashes/"+@ward.id.to_s+"/"+@wardplace.id.to_s %>
+<div id="wards">
+  <% @trash_types.each do |trash_type| %>
+    <% @trash_explain = Trashexplain.find_by(trash_type_id: trash_type.id,wardplace_id:@wardplace.id)%>
+    <% if @trash_explain == nil %>
+      <% @trash_explain = Trashexplain.find_by(trash_type_id: trash_type.id,wardplace_id:@default_wardplace.id)%>
+    <% end %>
+    <% if @trash_explain != nil %>
+      <div class="trash_cover">
+        <h3>ゴミの種類：<%= trash_type.name %></h3>
+
+        <h3>説明</h3>
+        <p>
+          <%= @trash_explain.explane %>
+        </p>
+      </div>
+    <% end %>
+    
+  <% end %>
+</div>
+
+<div>
+  <%= link_to "区の選択に戻る", wards_path %>
+</div>
